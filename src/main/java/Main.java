@@ -5,5 +5,6 @@ public class Main {
         System.out.println("diamond \u2666");
         System.out.println("club \u2663");
         System.out.println("spade \u2660");
+
     }
 }
