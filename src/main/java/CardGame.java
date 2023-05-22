@@ -1,11 +1,12 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CardGame {
 
     ArrayList<Card> deckOfCards = new ArrayList<>();
 
-    public void initialiseCardGame() {
+    public CardGame() {
         for (int i = 0; i < CardSuit.values().length; i++) {
             for (int j = 2; j < 15; j++) {
                 String symbol = "";
@@ -31,10 +32,18 @@ public class CardGame {
         return topCard;
     }
 
-    public static void main(String[] args) {
-
+    public ArrayList<Card> sortDeckingNumberOrder(){
+        Collections.sort(deckOfCards, (a,b) -> a.getValue()-b.getValue());
+        return deckOfCards;
     }
 
+    public ArrayList<Card> sortDeckIntoSuits() {
+        Collections.sort(deckOfCards, (a,b) -> a.getSymbol()-b.getSymbol());
+        return deckOfCards;
+    }
 
-
+    public ArrayList<Card> shuffleDeck() {
+        Collections.shuffle(deckOfCards);
+        return deckOfCards;
+    }
 }

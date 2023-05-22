@@ -6,6 +6,9 @@ public class Main {
         System.out.println("club \u2663");
         System.out.println("spade \u2660");
 
+        CardGame card = new CardGame();
+        System.out.println(card.deckOfCards.toString());
+
 
     }
 }
