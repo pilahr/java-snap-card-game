@@ -6,4 +6,8 @@ public enum CardSuit {
     CardSuit(String cardSuitUnicode) {
         this.cardSuitUnicode = cardSuitUnicode;
     }
+
+    public String getCardSuitUnicode() {
+        return cardSuitUnicode;
+    }
 }
