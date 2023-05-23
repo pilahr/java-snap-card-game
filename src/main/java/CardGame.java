@@ -1,11 +1,10 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class CardGame {
 
-    ArrayList<Card> deckOfCards = new ArrayList<>();
+    private static ArrayList<Card> deckOfCards = new ArrayList<>();
 
     public CardGame() {
         for (int i = 0; i < CardSuit.values().length; i++) {
@@ -24,12 +23,15 @@ public class CardGame {
                     symbol = Integer.toString(j);
                 }
 
-//                switch (CardSuit.)
                 deckOfCards.add(new Card(CardSuit.values()[i].getCardSuitUnicode(), symbol, j));
             }
         }
     }
 
+    public ArrayList<Card> getDeck(){
+        System.out.println(deckOfCards);
+        return deckOfCards;
+    }
     public Card dealCard() {
         Card topCard = deckOfCards.get(0);
         deckOfCards.remove(0);
