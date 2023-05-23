@@ -9,6 +9,7 @@ public class CardGame {
 
     public CardGame() {
         for (int i = 0; i < CardSuit.values().length; i++) {
+
             for (int j = 2; j < 15; j++) {
                 String symbol = "";
                 if (j == 11) {
@@ -22,7 +23,9 @@ public class CardGame {
                 } else {
                     symbol = Integer.toString(j);
                 }
-                deckOfCards.add(new Card(CardSuit.values()[i].toString(), symbol, j));
+
+//                switch (CardSuit.)
+                deckOfCards.add(new Card(CardSuit.values()[i].getCardSuitUnicode(), symbol, j));
             }
         }
     }
@@ -34,7 +37,7 @@ public class CardGame {
         return topCard;
     }
 
-    public ArrayList<Card> sortDeckingNumberOrder(){
+    public ArrayList<Card> sortDeckingNumberOrder() {
         Collections.sort(deckOfCards, Comparator.comparingInt(Card::getValue));
         System.out.println(deckOfCards);
         return deckOfCards;
