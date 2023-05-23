@@ -4,6 +4,9 @@ public class Main {
 
         CardGame cards = new CardGame();
         cards.getDeck();
+
+        Snap snap = new Snap();
+        snap.startGame();
 //        cards.dealCard();
 //        cards.sortDeckingNumberOrder();
 //        cards.sortDeckIntoSuits();
