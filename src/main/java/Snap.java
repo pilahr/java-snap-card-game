@@ -51,9 +51,10 @@ public class Snap extends CardGame {
 
                 if (cardIndex < getDeck().size()) {
                     if (cardIndex % 2 == 0) {
-                        /// giving card to player
+                        /// each players open card... player1 gets even index, player2 gets odd?
+                        snapRun(timer, playerOne);
                     } else {
-                        ///
+                        snapRun(timer, playerTwo);
                     }
                     cardIndex++;
                     if (cardIndex == getDeck().size()) {
@@ -71,7 +72,7 @@ public class Snap extends CardGame {
 
     }
 
-    public void snapRun(Timer gameTimer, Player currentPlayer, Player playerOne, Player playerTwo) {
+    public void snapRun(Timer gameTimer, Player currentPlayer) {
 
         //// if symbols are equal --> win
         //// if type snap ---> that player win 2sec to type
@@ -88,7 +89,7 @@ public class Snap extends CardGame {
                     //if has keyboard input --> keep that input
                     //if no input (blank "") --> ""
                     //if "snap" in lowercase ---> print win +name /else --> lose + name
-                        // replay?
+                    // replay?
 
                 }
             };

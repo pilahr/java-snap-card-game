@@ -35,32 +35,27 @@ public class CardGame {
     }
 
     public ArrayList<Card> getDeck() {
-        System.out.println(deckOfCards);
         return deckOfCards;
     }
 
     public Card dealCard(int cardIndex) {
         Card topCard = deckOfCards.get(0);
         deckOfCards.remove(0);
-        System.out.println(topCard);
         return topCard;
     }
 
     public ArrayList<Card> sortDeckingNumberOrder() {
         Collections.sort(deckOfCards, Comparator.comparingInt(Card::getValue));
-        System.out.println(deckOfCards);
         return deckOfCards;
     }
 
     public ArrayList<Card> sortDeckIntoSuits() {
         Collections.sort(deckOfCards, Comparator.comparing(Card::getSuit));
-        System.out.println(deckOfCards);
         return deckOfCards;
     }
 
     public ArrayList<Card> shuffleDeck() {
         Collections.shuffle(deckOfCards);
-        System.out.println(deckOfCards);
         return deckOfCards;
     }
 }
