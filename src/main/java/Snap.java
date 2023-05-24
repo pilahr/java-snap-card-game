@@ -34,7 +34,7 @@ public class Snap extends CardGame {
 
 
         } else if (option.equals("2")) {
-            System.out.println("Quiting Game"); // wait to create quit game method
+            System.out.println("Quiting Game"); // wait to create quit game method if have time
         } else {
             menu();
         }
@@ -50,26 +50,26 @@ public class Snap extends CardGame {
                 //// task to display card of each player
 
                 if (cardIndex < getDeck().size()) {
+
                     if (cardIndex % 2 == 0) {
                         /// each players open card... player1 gets even index, player2 gets odd?
                         snapRun(timer, playerOne);
                     } else {
                         snapRun(timer, playerTwo);
                     }
+
                     cardIndex++;
                     if (cardIndex == getDeck().size()) {
                         System.out.println("No snap in this game!");
                         timer.cancel();
-                        // ask if want to replay
+                        System.out.println("Do you want to play again?"); // replay method
                     }
-
                 } else {
                     timer.cancel();
                 }
             }
         };
         timer.scheduleAtFixedRate(timerTask, 0, 2000);
-
     }
 
     public void snapRun(Timer gameTimer, Player currentPlayer) {
@@ -78,7 +78,7 @@ public class Snap extends CardGame {
         //// if type snap ---> that player win 2sec to type
 
         //Showing each player's card --- Ex PlayerA 2 of Heart, PlayerB 5 of Diamond and so onn..
-        System.out.println("\n" + currentPlayer.getName());
+        System.out.println("\n Player: " + currentPlayer.getName());
         System.out.println(dealCard(cardIndex));
 
         if (cardIndex > 0 && dealCard(cardIndex - 1).getSymbol().equals(dealCard(cardIndex).getSymbol())) {
@@ -86,10 +86,11 @@ public class Snap extends CardGame {
             TimerTask timerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    //if has keyboard input --> keep that input
-                    //if no input (blank "") --> ""
+                    //if has keyboard input --> keep that input in a variable
+                    //if no input (blank "") --> "" in a variable
                     //if "snap" in lowercase ---> print win +name /else --> lose + name
                     // replay?
+
 
                 }
             };
