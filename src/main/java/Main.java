@@ -6,7 +6,7 @@ public class Main {
         cards.getDeck();
 
         Snap snap = new Snap();
-        snap.startGame();
+        snap.menu();
 //        cards.dealCard();
 //        cards.sortDeckingNumberOrder();
 //        cards.sortDeckIntoSuits();

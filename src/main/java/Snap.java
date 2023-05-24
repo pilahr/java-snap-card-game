@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Snap extends CardGame {
     Scanner scanner = new Scanner(System.in);
 
-    public void startGame() {
+    public void menu() {
         System.out.println("Welcome to the Snap Card Game! ");
         System.out.println("Please select a valid option: ");
         System.out.println("1: Play | 2: Exit");
@@ -27,7 +27,7 @@ public class Snap extends CardGame {
         } else if (option.equals("2")) {
             System.out.println("QUIT GAME"); // wait to create quit game method
         } else {
-            startGame();
+            menu();
         }
     }
 
