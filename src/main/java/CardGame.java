@@ -1,10 +1,16 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Scanner;
 
 public class CardGame {
-
+    private String name;
     private static ArrayList<Card> deckOfCards = new ArrayList<>();
+
+    public CardGame(String name, Scanner scanner) {
+        this.name = name;
+
+    }
 
     public CardGame() {
         for (int i = 0; i < CardSuit.values().length; i++) {
@@ -28,11 +34,12 @@ public class CardGame {
         }
     }
 
-    public ArrayList<Card> getDeck(){
+    public ArrayList<Card> getDeck() {
         System.out.println(deckOfCards);
         return deckOfCards;
     }
-    public Card dealCard() {
+
+    public Card dealCard(int cardIndex) {
         Card topCard = deckOfCards.get(0);
         deckOfCards.remove(0);
         System.out.println(topCard);
