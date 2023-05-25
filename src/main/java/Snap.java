@@ -9,6 +9,7 @@ public class Snap extends CardGame {
     private Scanner scanner = new Scanner(System.in);
     public int cardIndex = 0;
 
+    boolean hasSnapped = false;
 
     public void menu() {
         System.out.println("Welcome to the Snap Card Game! ");
@@ -32,6 +33,8 @@ public class Snap extends CardGame {
             System.out.println("\nGame starts...");
             System.out.println("Getting a deck...");
 
+            System.out.println("\nPress Enter to deal a card");
+
             playGame(playerOne, playerTwo);
 
 
@@ -45,87 +48,65 @@ public class Snap extends CardGame {
     public void playGame(Player playerOne, Player playerTwo) {
         shuffleDeck();
         cardIndex = 0;
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                //// task to display card of each player
 
+        while (cardIndex <= 52) {
+            hasSnapped = false;
 
-                if (cardIndex < getDeck().size()) {
-
-
-                    if (cardIndex % 2 == 0) {
-                        snapRun(timer, playerOne, playerOne, playerTwo);
-                    } else {
-                        snapRun(timer, playerTwo, playerOne, playerTwo);
-                    }
-
-
-                    cardIndex++;
-                    System.out.println(cardIndex);// to be removed
-
-                    if (cardIndex == getDeck().size()) {
-                        System.out.println("No snap in this game!\n");
-                        timer.cancel();
-                        replay(playerOne, playerTwo);
-                    }
-                } else {
-                    timer.cancel();
+            if (cardIndex % 2 == 0) {
+                String input = scanner.nextLine().toLowerCase();
+                if (input.equals("")) {
+                    snapRun(playerOne, playerOne, playerTwo);
+                }
+            } else {
+                String input = scanner.nextLine().toLowerCase();
+                if (input.equals("")) {
+                    snapRun(playerTwo, playerOne, playerTwo);
                 }
             }
-        };
-        timer.scheduleAtFixedRate(timerTask, 0, 2000);
+
+
+            cardIndex++;
+
+            if (0 == getDeck().size()) {
+                System.out.println("No snap in this game!\n");
+
+                replay(playerOne, playerTwo);
+            }
+        }
     }
 
-    public void snapRun(Timer gameTimer, Player currentPlayer, Player playerOne, Player playerTwo) {
+
+    public void snapRun(Player currentPlayer, Player playerOne, Player playerTwo) {
 
 
         //// if symbols are equal --> win
         //// if type snap ---> that player win --- 2sec to type
 
-        //Showing each player's card --- Ex PlayerA 2 of Heart, PlayerB 5 of Diamond and so onn..
         System.out.println("\n Player: " + currentPlayer.getName());
         System.out.println(dealCard(cardIndex));
 
-        if (cardIndex > 0 && dealCard(cardIndex-1).getSymbol()
+        if (cardIndex > 0 && dealCard(cardIndex - 1).getSymbol()
                 .equals(dealCard(cardIndex).getSymbol())) {
+
+            hasSnapped = true;
 
             Timer timer = new Timer();
             TimerTask timerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    //if has keyboard input --> keep that input in a variable
-                    //if no input (blank "") --> "" in a variable
-                    //if "snap" in lowercase ---> print win +name /else --> lose + name
-                    // replay?
+                    String input = scanner.nextLine().toLowerCase();
 
-                    String inputFromKeyboard = "";
-                    if (scanner.hasNextLine()) {
-                        inputFromKeyboard = scanner.nextLine();
-                    } else {
-                        inputFromKeyboard = "";
-                    }
-
-                    if (inputFromKeyboard.toLowerCase().equals("snap")) {
-                        System.out.println("Congrats!! You Win!!, Player: "+ currentPlayer.getName());
+                    if (input.equals("snap")) {
+                        System.out.println("Congrats!! You Win!!, Player: " + currentPlayer.getName());
                         System.out.println("Press Enter to continue..");
-
-                        String enter = scanner.nextLine();
-                        if (enter.equals("")) {
-                            timer.cancel();
-                            gameTimer.cancel();
-                            replay(playerOne, playerTwo);
-                        } else {
-                            System.out.println("Press Enter to continue..");
-                        }
+                    } else {
+                        replay(playerOne, playerTwo);
                     }
                 }
             };
             timer.scheduleAtFixedRate(timerTask, 0, 2000);
         }
     }
-
 
 
     public void replay(Player playerOne, Player playerTwo) {
