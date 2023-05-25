@@ -5,7 +5,5 @@ public class Main {
         Snap snap = new Snap();
         snap.menu();
 
-
-
     }
 }

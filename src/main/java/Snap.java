@@ -4,9 +4,9 @@ import java.util.TimerTask;
 
 public class Snap extends CardGame {
 
-
     Scanner scanner = new Scanner(System.in);
     public int cardIndex = 0;
+
 
     public void menu() {
         System.out.println("Welcome to the Snap Card Game! ");
@@ -22,7 +22,7 @@ public class Snap extends CardGame {
             System.out.println("Player 1: " + playerOne.getName());
 
 
-            System.out.println("Please enter Player2 name: ");
+            System.out.println("\nPlease enter Player2 name: ");
             String playerTwoName = scanner.nextLine();
             Player playerTwo = new Player(playerTwoName);
             System.out.println("Player 2: " + playerTwo.getName());
@@ -51,19 +51,22 @@ public class Snap extends CardGame {
 
                 if (cardIndex < getDeck().size()) {
 
+                    cardIndex++;
                     if (cardIndex % 2 == 0) {
-                        /// each players open card... player1 gets even index, player2 gets odd?
-                        snapRun(timer, playerOne);
-                    } else {
+                        /// each players open card... player1 gets even index, player2 gets odd
                         snapRun(timer, playerTwo);
+                    } else {
+                        snapRun(timer, playerOne);
                     }
 
-                    cardIndex++;
+
+                    System.out.println(cardIndex);
                     if (cardIndex == getDeck().size()) {
                         System.out.println("No snap in this game!");
                         timer.cancel();
                         System.out.println("Do you want to play again?"); // replay method
                     }
+
                 } else {
                     timer.cancel();
                 }
@@ -81,7 +84,9 @@ public class Snap extends CardGame {
         System.out.println("\n Player: " + currentPlayer.getName());
         System.out.println(dealCard(cardIndex));
 
-        if (cardIndex > 0 && dealCard(cardIndex - 1).getSymbol().equals(dealCard(cardIndex).getSymbol())) {
+        if (cardIndex > 0 && dealCard(cardIndex - 1).getSymbol()
+                .equals(dealCard(cardIndex).getSymbol())) {
+
             Timer timer = new Timer();
             TimerTask timerTask = new TimerTask() {
                 @Override
@@ -96,6 +101,5 @@ public class Snap extends CardGame {
             };
             timer.scheduleAtFixedRate(timerTask, 0, 2000);
         }
-
     }
 }
