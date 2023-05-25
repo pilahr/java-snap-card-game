@@ -1,10 +1,12 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Snap extends CardGame {
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     public int cardIndex = 0;
 
 
@@ -34,7 +36,7 @@ public class Snap extends CardGame {
 
 
         } else if (option.equals("2")) {
-            System.out.println("Quiting Game"); // wait to create quit game method if have time
+            quitGame();
         } else {
             menu();
         }
@@ -49,24 +51,25 @@ public class Snap extends CardGame {
             public void run() {
                 //// task to display card of each player
 
+
                 if (cardIndex < getDeck().size()) {
 
-                    cardIndex++;
+
                     if (cardIndex % 2 == 0) {
-                        /// each players open card... player1 gets even index, player2 gets odd
-                        snapRun(timer, playerTwo);
+                        snapRun(timer, playerOne, playerOne, playerTwo);
                     } else {
-                        snapRun(timer, playerOne);
+                        snapRun(timer, playerTwo, playerOne, playerTwo);
                     }
 
 
-                    System.out.println(cardIndex);
+                    cardIndex++;
+                    System.out.println(cardIndex);// to be removed
+
                     if (cardIndex == getDeck().size()) {
-                        System.out.println("No snap in this game!");
+                        System.out.println("No snap in this game!\n");
                         timer.cancel();
-                        System.out.println("Do you want to play again?"); // replay method
+                        replay(playerOne, playerTwo);
                     }
-
                 } else {
                     timer.cancel();
                 }
@@ -75,16 +78,17 @@ public class Snap extends CardGame {
         timer.scheduleAtFixedRate(timerTask, 0, 2000);
     }
 
-    public void snapRun(Timer gameTimer, Player currentPlayer) {
+    public void snapRun(Timer gameTimer, Player currentPlayer, Player playerOne, Player playerTwo) {
+
 
         //// if symbols are equal --> win
-        //// if type snap ---> that player win 2sec to type
+        //// if type snap ---> that player win --- 2sec to type
 
         //Showing each player's card --- Ex PlayerA 2 of Heart, PlayerB 5 of Diamond and so onn..
         System.out.println("\n Player: " + currentPlayer.getName());
         System.out.println(dealCard(cardIndex));
 
-        if (cardIndex > 0 && dealCard(cardIndex - 1).getSymbol()
+        if (cardIndex > 0 && dealCard(cardIndex-1).getSymbol()
                 .equals(dealCard(cardIndex).getSymbol())) {
 
             Timer timer = new Timer();
@@ -96,10 +100,51 @@ public class Snap extends CardGame {
                     //if "snap" in lowercase ---> print win +name /else --> lose + name
                     // replay?
 
+                    String inputFromKeyboard = "";
+                    if (scanner.hasNextLine()) {
+                        inputFromKeyboard = scanner.nextLine();
+                    } else {
+                        inputFromKeyboard = "";
+                    }
 
+                    if (inputFromKeyboard.toLowerCase().equals("snap")) {
+                        System.out.println("Congrats!! You Win!!, Player: "+ currentPlayer.getName());
+                        System.out.println("Press Enter to continue..");
+
+                        String enter = scanner.nextLine();
+                        if (enter.equals("")) {
+                            timer.cancel();
+                            gameTimer.cancel();
+                            replay(playerOne, playerTwo);
+                        } else {
+                            System.out.println("Press Enter to continue..");
+                        }
+                    }
                 }
             };
             timer.scheduleAtFixedRate(timerTask, 0, 2000);
         }
+    }
+
+
+
+    public void replay(Player playerOne, Player playerTwo) {
+        System.out.println("Would you like to play again ? ");
+        System.out.println("y/n ?");
+        String reply = scanner.nextLine();
+
+        if (reply.toLowerCase().equals("n")) {
+            menu();
+        } else if (reply.toLowerCase().equals("y")) {
+            playGame(playerOne, playerTwo);
+        } else {
+            System.out.println("Please select a valid option!");
+            replay(playerOne, playerTwo);
+        }
+    }
+
+    public void quitGame() {
+        cardIndex = 52;
+        System.out.println("Quitting Game..");
     }
 }
