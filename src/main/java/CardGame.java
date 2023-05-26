@@ -36,9 +36,9 @@ public class CardGame {
         return deckOfCards;
     }
 
-    public Card dealCard(int cardIndex) {
-        Card topCard = deckOfCards.get(cardIndex);
-        deckOfCards.remove(cardIndex);
+    public Card dealCard() {
+        Card topCard = deckOfCards.get(0);
+        deckOfCards.remove(0);
         return topCard;
     }
 
