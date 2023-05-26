@@ -87,31 +87,11 @@ public class Snap extends CardGame {
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
-
                     while (snapped && input.equals("")) {
-
-//                        if (input.equals("")) {
                         System.out.println("\n** Time's up, there was a snap **\n");
                         timer.cancel();
                         replay(playerOne, playerTwo);
-//                        }
                     }
-
-
-//                    if ((finalCard.getSymbol()).equals(finalCard1.getSymbol()) && input.equals("snap")) {
-//                        System.out.println("\n** SNAP!! You Win! **\n");
-//                        timer.cancel();
-//                        replay(playerOne, playerTwo);
-//                    }
-//                    if ((finalCard.getSymbol()) != (finalCard.getSymbol()) | input.equals("snap")) {
-//                        System.out.println("\n** It's not a snap, you loose! **\n");
-//                        timer.cancel();
-//                        replay(playerOne, playerTwo);
-//                    }
-//                    if ((finalCard.getSymbol()).equals(finalCard1.getSymbol())) {
-//                        timer.cancel();
-//                        System.out.println("Time's up, there was a snap");
-//                    }
                 }
             };
             timer.scheduleAtFixedRate(task, 2000, 2000);
@@ -129,70 +109,9 @@ public class Snap extends CardGame {
                 System.out.println("\n* No snap in this game! *\n");
                 replay(playerOne, playerTwo);
             }
-
-
         }
-
-
     }
 
-
-//    public void snapRun() {
-//        Card previousCard = dealCard(cardIndex - 1);
-//        Card currentCard = dealCard(cardIndex);
-//        String snapInput = scanner.nextLine();
-//        Timer timer = new Timer();
-//        TimerTask timerTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//                if (previousCard.getSymbol().equals(currentCard.getSymbol()) && snapInput.equals("snap")) {
-//                    timer.cancel();
-//                    System.out.println("SNAP!! You Win! Player: " );
-//                } else {
-//                    System.out.println("It's not a snap, you loose!");
-//                    replay();
-//                }
-//            }
-//        };
-//        timer.scheduleAtFixedRate(timerTask, 0, 2000);
-//    }
-
-
-//        if (dealCard(cardIndex - 1).getSymbol().equals(dealCard(cardIndex).getSymbol())) {
-//
-//            String input = scanner.nextLine().toLowerCase();
-//
-//            if (input.equals("snap")) {
-//                System.out.println(dealCard(cardIndex - 1));
-//                System.out.println(dealCard(cardIndex));
-//                System.out.println("SNAP!! You Win!!, Player: " + currentPlayer.getName());
-//                System.out.println("Press Enter to continue..");
-//            } else {
-//                replay(playerOne, playerTwo);
-//            }
-//        }
-//    }
-
-
-//            Timer timer = new Timer();
-//            TimerTask timerTask = new TimerTask() {
-//                @Override
-//                public void run() {
-//                    String input = scanner.nextLine().toLowerCase();
-//
-//                    if (input.equals("snap")) {
-//                        System.out.println(dealCard(cardIndex-1));
-//                        System.out.println(dealCard(cardIndex));
-//                        System.out.println("SNAP!! You Win!!, Player: " + currentPlayer.getName());
-//                        System.out.println("Press Enter to continue..");
-//                    } else {
-//                        replay(playerOne, playerTwo);
-//                    }
-//                }
-//            };
-//            timer.scheduleAtFixedRate(timerTask, 0, 2000);
-
-//    }
 
 
     public void replay(Player playerOne, Player playerTwo) {
@@ -204,8 +123,6 @@ public class Snap extends CardGame {
         if (reply.equals("n")) {
             menu();
         } else if (reply.equals("y")) {
-            CardGame newDeck = new CardGame();
-            newDeck.shuffleDeck();
             System.out.println("Press Enter to continue..");
             playGame(playerOne, playerTwo);
         } else {
