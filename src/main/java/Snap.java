@@ -46,11 +46,11 @@ public class Snap extends CardGame {
         } else if (option.equals("3")) {
             System.out.println("-----------------------------------------------------------------------------------------");
             System.out.println("Snap Card game is for two players. Players enter their names.");
-            System.out.println("Each of the players takes turn to deal a card from a deck.");
+            System.out.println("Each of the players takes turn to deal a card from a deck by pressing Enter.");
             System.out.println("Keep an eyes on the symbols of the cards.");
             System.out.println("If the symbol of a card you drew matches with the previous one from another player.");
             System.out.println("It's a Snap!! ");
-            System.out.println("The player who types 'snap' first win the game.");
+            System.out.println("The player who types 'snap' first (within 2 seconds) win the game.");
             System.out.println("-----------------------------------------------------------------------------------------\n");
             System.out.println("Are you ready to play??");
             System.out.println("Y/n ?");
