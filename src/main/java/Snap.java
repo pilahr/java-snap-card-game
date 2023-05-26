@@ -23,13 +23,13 @@ public class Snap extends CardGame {
         String option = scanner.nextLine();
 
         if (option.equals("1")) {
-            System.out.println("Please enter Player1 name: ");
+            System.out.print("Please enter Player1 name: ");
             String playerOneName = scanner.nextLine();
             Player playerOne = new Player(playerOneName);
             System.out.println("Player 1: " + playerOne.getName());
 
 
-            System.out.println("\nPlease enter Player2 name: ");
+            System.out.print("\nPlease enter Player2 name: ");
             String playerTwoName = scanner.nextLine();
             Player playerTwo = new Player(playerTwoName);
             System.out.println("Player 2: " + playerTwo.getName());
@@ -52,8 +52,8 @@ public class Snap extends CardGame {
     public void playGame(Player playerOne, Player playerTwo) {
         shuffleDeck();
         cardIndex = 0;
-        Card card1 = new Card(null,null,0);
-        Card card2 = new Card(null,null,0);
+        Card card1 = new Card(null, null, 0);
+        Card card2 = new Card(null, null, 0);
 
         while (cardIndex <= 52) {
 
@@ -74,56 +74,56 @@ public class Snap extends CardGame {
                 }
             }
 
-            System.out.println("Inside the while loop " + card1.getSymbol());/// don't forget to delete
-            System.out.println("Inside the while loop " + card2.getSymbol());/// don't forget to delete
+            Timer timer = new Timer();
+            Card finalCard = card1;
+            Card finalCard1 = card2;
+            boolean snapped = finalCard.getSymbol().equals(finalCard1.getSymbol());
 
-
-//            Timer timer = new Timer();
-//            TimerTask task = new TimerTask() {
-//                @Override
-//                public void run() {
-//
-//                }
-//            }
-            if ((card1.getSymbol()).equals(card2.getSymbol()) && input.equals("snap")) {
+            while (snapped && input.equals("snap")) {
                 System.out.println("\n** SNAP!! You Win! **\n");
                 replay(playerOne, playerTwo);
             }
-            if ((card1.getSymbol()) != (card1.getSymbol()) | input.equals("snap")) {
-                System.out.println("\n** It's not a snap, you loose! **\n");
-                replay(playerOne, playerTwo);
-            }
-//            Timer timer = new Timer();
-//            Card finalCard = card1;
-//            Card finalCard1 = card2;
-//            TimerTask timerTask = new TimerTask() {
-//
-//                @Override
-//                public void run() {
-//
-//                    if ((finalCard.getSymbol()) != (finalCard1.getSymbol()) && input.equals("snap")) {
-//                        System.out.println("\nIt's not a snap, you loose!\n");
+
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+
+                    while (snapped && input.equals("")) {
+
+//                        if (input.equals("")) {
+                        System.out.println("\n** Time's up, there was a snap **\n");
+                        timer.cancel();
+                        replay(playerOne, playerTwo);
+//                        }
+                    }
+
+
+//                    if ((finalCard.getSymbol()).equals(finalCard1.getSymbol()) && input.equals("snap")) {
+//                        System.out.println("\n** SNAP!! You Win! **\n");
 //                        timer.cancel();
 //                        replay(playerOne, playerTwo);
 //                    }
-//                    else if ((finalCard.getSymbol()).equals(finalCard1.getSymbol()) && input.equals("snap")) {
-//                        System.out.println("\n** SNAP!! You Win! **\n");
+//                    if ((finalCard.getSymbol()) != (finalCard.getSymbol()) | input.equals("snap")) {
+//                        System.out.println("\n** It's not a snap, you loose! **\n");
 //                        timer.cancel();
-//
+//                        replay(playerOne, playerTwo);
 //                    }
-////                    else if ((finalCard.getSymbol()).equals(finalCard1.getSymbol())) {
-////                        System.out.println("Time's up");
-////                        timer.cancel();
-////                    }
-//                }
-//            };
-//            timer.scheduleAtFixedRate(timerTask, 0, 2000);
+//                    if ((finalCard.getSymbol()).equals(finalCard1.getSymbol())) {
+//                        timer.cancel();
+//                        System.out.println("Time's up, there was a snap");
+//                    }
+                }
+            };
+            timer.scheduleAtFixedRate(task, 2000, 2000);
 
 
+            while (!snapped && input.equals("snap")) {
+                System.out.println("\n** It's not a snap, you loose! **\n");
+                timer.cancel();
+                replay(playerOne, playerTwo);
+            }
 
-//
-//            System.out.println("Card Index = " + cardIndex); /// don't forget to delete
-//            System.out.println(getDeck());/// don't forget to delete
+
             cardIndex++;
             if (0 == getDeck().size()) {
                 System.out.println("\n* No snap in this game! *\n");
@@ -132,7 +132,6 @@ public class Snap extends CardGame {
 
 
         }
-
 
 
     }
