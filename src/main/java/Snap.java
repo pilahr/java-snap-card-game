@@ -52,11 +52,10 @@ public class Snap extends CardGame {
     public void playGame(Player playerOne, Player playerTwo) {
         shuffleDeck();
         cardIndex = 0;
-        Card card1 = null;
-        Card card2 = null;
+        Card card1 = new Card(null,null,0);
+        Card card2 = new Card(null,null,0);
 
         while (cardIndex <= 52) {
-
 
 
             String input = scanner.nextLine().toLowerCase();
@@ -75,52 +74,49 @@ public class Snap extends CardGame {
                 }
             }
 
-            System.out.println("Inside the while loop " + card1);/// don't forget to delete
-            System.out.println("Inside the while loop " + card2);/// don't forget to delete
+            System.out.println("Inside the while loop " + card1.getSymbol());/// don't forget to delete
+            System.out.println("Inside the while loop " + card2.getSymbol());/// don't forget to delete
 
+            if (card1 == card2) {
+                System.out.println("SNAPPP");
+            }
 
-
-            System.out.println("Card Index = " + cardIndex); /// don't forget to delete
-            System.out.println(getDeck());/// don't forget to delete
+//
+//            System.out.println("Card Index = " + cardIndex); /// don't forget to delete
+//            System.out.println(getDeck());/// don't forget to delete
             cardIndex++;
             if (0 == getDeck().size()) {
                 System.out.println("\n* No snap in this game! *\n");
-                replay();
+                replay(playerOne, playerTwo);
             }
-
 
 
         }
-        System.out.println("Out of while loop" + card1);/// don't forget to delete
-        System.out.println("Out of while loop" + card2);/// don't forget to delete
+
 
 
     }
 
 
-    public void snapRun() {
-        Card previousCard = dealCard(cardIndex - 1);
-        Card currentCard = dealCard(cardIndex);
-        String snapInput = scanner.nextLine();
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                if (previousCard.getSymbol().equals(currentCard.getSymbol()) && snapInput.equals("snap")) {
-                    timer.cancel();
-                    System.out.println("SNAP!! You Win! Player: " );
-                } else {
-                    System.out.println("It's not a snap, you loose!");
-                    replay();
-                }
-            }
-        };
-        timer.scheduleAtFixedRate(timerTask, 0, 2000);
-    }
-
-
-
-
+//    public void snapRun() {
+//        Card previousCard = dealCard(cardIndex - 1);
+//        Card currentCard = dealCard(cardIndex);
+//        String snapInput = scanner.nextLine();
+//        Timer timer = new Timer();
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                if (previousCard.getSymbol().equals(currentCard.getSymbol()) && snapInput.equals("snap")) {
+//                    timer.cancel();
+//                    System.out.println("SNAP!! You Win! Player: " );
+//                } else {
+//                    System.out.println("It's not a snap, you loose!");
+//                    replay();
+//                }
+//            }
+//        };
+//        timer.scheduleAtFixedRate(timerTask, 0, 2000);
+//    }
 
 
 //        if (dealCard(cardIndex - 1).getSymbol().equals(dealCard(cardIndex).getSymbol())) {
@@ -160,7 +156,7 @@ public class Snap extends CardGame {
 //    }
 
 
-    public void replay() {
+    public void replay(Player playerOne, Player playerTwo) {
         System.out.println("Would you like to play again ? ");
         System.out.println("Y/n ?");
         String reply = scanner.nextLine().toLowerCase();
@@ -170,10 +166,10 @@ public class Snap extends CardGame {
         } else if (reply.equals("y")) {
             CardGame newDeck = new CardGame();
             newDeck.shuffleDeck();
-//            playGame(Player playerOne, Player playerTwo);
+            playGame(playerOne, playerTwo);
         } else {
             System.out.println("Please select a valid option!");
-            replay();
+            replay(playerOne, playerTwo);
         }
     }
 
