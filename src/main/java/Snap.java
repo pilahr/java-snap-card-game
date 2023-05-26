@@ -1,6 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -70,15 +67,16 @@ public class Snap extends CardGame {
     }
 
     public void playGame(Player playerOne, Player playerTwo) {
-        shuffleDeck();
+        CardGame snapGameCard = new CardGame("Snap");
+        snapGameCard.shuffleDeck();
+
         cardIndex = 0;
         Card card1 = new Card(null, null, 0);
         Card card2 = new Card(null, null, 0);
 
         while (cardIndex <= 52) {
-
-
             String input = scanner.nextLine().toLowerCase();
+
             if (cardIndex % 2 == 0) {
                 if (input.equals("")) {
                     card1 = dealCard();
@@ -99,35 +97,27 @@ public class Snap extends CardGame {
             Card finalCard1 = card2;
             boolean snapped = finalCard.getSymbol().equals(finalCard1.getSymbol());
 
-//            try {
-                if (snapped && input.equals("snap")) {
-                    System.out.println("\n** SNAP!! You Win! **\n");
-                    System.out.println();
-//                    timer.cancel();
-//                    replay(playerOne, playerTwo);
-                }
-//            } catch (Exception e) {
-//                System.out.println("Press Enter to continue..");
-//            }
-
+            if (snapped && input.equals("snap")) {
+                System.out.println("\n** SNAP!! You Win! **\n");
+                System.out.println();
+            }
 
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
-                        while (snapped && input.equals("")) {
-                            timer.cancel();
-                            System.out.println("\n** Time's up, there was a snap **\n");
-                            System.out.println("------------------");
-                            System.out.println(finalCard);
-                            System.out.println(finalCard1);
-                            System.out.println("------------------");
-                            System.out.println("Press Enter to continue..");
-                            break;
-                        }
+                    while (snapped && input.equals("")) {
+                        timer.cancel();
+                        System.out.println("\n** Time's up, there was a snap **\n");
+                        System.out.println("------------------");
+                        System.out.println(finalCard);
+                        System.out.println(finalCard1);
+                        System.out.println("------------------");
+                        System.out.println("Press Enter to continue..");
+                        break;
+                    }
                 }
             };
             timer.scheduleAtFixedRate(task, 2000, 2000);
-
 
             while (!snapped && input.equals("snap")) {
                 System.out.println("\n** It's not a snap, you loose! **\n");
@@ -143,7 +133,6 @@ public class Snap extends CardGame {
         }
     }
 
-
     public void replay(Player playerOne, Player playerTwo) {
         System.out.println("Would you like to play again ? ");
         System.out.println("Y/n ?");
@@ -154,15 +143,14 @@ public class Snap extends CardGame {
             menu();
         } else if (reply.equals("y")) {
             System.out.println("Press Enter to continue..");
-            CardGame newCard = new CardGame();
+            CardGame newCard = new CardGame("Snap");
             newCard.shuffleDeck();
             playGame(playerOne, playerTwo);
         } else {
             System.out.println("Please select a valid option!");
-            CardGame newCard = new CardGame();
+            CardGame newCard = new CardGame("Snap");
             newCard.shuffleDeck();
             replay(playerOne, playerTwo);
         }
     }
-
 }
