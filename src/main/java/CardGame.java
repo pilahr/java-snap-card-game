@@ -1,10 +1,14 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.stream.Collectors;
 
 public class CardGame {
-
+    private String name;
     private static ArrayList<Card> deckOfCards = new ArrayList<>();
+
+    public CardGame(String name) {
+        this.name = name;
+    }
 
     public CardGame() {
         for (int i = 0; i < CardSuit.values().length; i++) {
@@ -28,32 +32,30 @@ public class CardGame {
         }
     }
 
-    public ArrayList<Card> getDeck(){
-        System.out.println(deckOfCards);
+    public ArrayList<Card> getDeck() {
         return deckOfCards;
     }
-    public Card dealCard() {
+
+    public Card dealCard(int cardIndex) {
         Card topCard = deckOfCards.get(0);
         deckOfCards.remove(0);
-        System.out.println(topCard);
         return topCard;
     }
 
     public ArrayList<Card> sortDeckingNumberOrder() {
-        Collections.sort(deckOfCards, Comparator.comparingInt(Card::getValue));
-        System.out.println(deckOfCards);
-        return deckOfCards;
+        return (ArrayList<Card>) deckOfCards.stream()
+                .sorted((a,b) -> a.getValue()-b.getValue())
+                .collect(Collectors.toList());
     }
 
     public ArrayList<Card> sortDeckIntoSuits() {
-        Collections.sort(deckOfCards, Comparator.comparing(Card::getSuit));
-        System.out.println(deckOfCards);
-        return deckOfCards;
+        return (ArrayList<Card>) deckOfCards.stream()
+                .sorted((a,b) -> a.getSuit().compareTo(b.getSuit()))
+                .collect(Collectors.toList());
     }
 
     public ArrayList<Card> shuffleDeck() {
         Collections.shuffle(deckOfCards);
-        System.out.println(deckOfCards);
         return deckOfCards;
     }
 }
