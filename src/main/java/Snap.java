@@ -77,9 +77,49 @@ public class Snap extends CardGame {
             System.out.println("Inside the while loop " + card1.getSymbol());/// don't forget to delete
             System.out.println("Inside the while loop " + card2.getSymbol());/// don't forget to delete
 
-            if (card1 == card2) {
-                System.out.println("SNAPPP");
+
+//            Timer timer = new Timer();
+//            TimerTask task = new TimerTask() {
+//                @Override
+//                public void run() {
+//
+//                }
+//            }
+            if ((card1.getSymbol()).equals(card2.getSymbol()) && input.equals("snap")) {
+                System.out.println("\n** SNAP!! You Win! **\n");
+                replay(playerOne, playerTwo);
             }
+            if ((card1.getSymbol()) != (card1.getSymbol()) | input.equals("snap")) {
+                System.out.println("\n** It's not a snap, you loose! **\n");
+                replay(playerOne, playerTwo);
+            }
+//            Timer timer = new Timer();
+//            Card finalCard = card1;
+//            Card finalCard1 = card2;
+//            TimerTask timerTask = new TimerTask() {
+//
+//                @Override
+//                public void run() {
+//
+//                    if ((finalCard.getSymbol()) != (finalCard1.getSymbol()) && input.equals("snap")) {
+//                        System.out.println("\nIt's not a snap, you loose!\n");
+//                        timer.cancel();
+//                        replay(playerOne, playerTwo);
+//                    }
+//                    else if ((finalCard.getSymbol()).equals(finalCard1.getSymbol()) && input.equals("snap")) {
+//                        System.out.println("\n** SNAP!! You Win! **\n");
+//                        timer.cancel();
+//
+//                    }
+////                    else if ((finalCard.getSymbol()).equals(finalCard1.getSymbol())) {
+////                        System.out.println("Time's up");
+////                        timer.cancel();
+////                    }
+//                }
+//            };
+//            timer.scheduleAtFixedRate(timerTask, 0, 2000);
+
+
 
 //
 //            System.out.println("Card Index = " + cardIndex); /// don't forget to delete
@@ -159,6 +199,7 @@ public class Snap extends CardGame {
     public void replay(Player playerOne, Player playerTwo) {
         System.out.println("Would you like to play again ? ");
         System.out.println("Y/n ?");
+
         String reply = scanner.nextLine().toLowerCase();
 
         if (reply.equals("n")) {
@@ -166,6 +207,7 @@ public class Snap extends CardGame {
         } else if (reply.equals("y")) {
             CardGame newDeck = new CardGame();
             newDeck.shuffleDeck();
+            System.out.println("Press Enter to continue..");
             playGame(playerOne, playerTwo);
         } else {
             System.out.println("Please select a valid option!");
