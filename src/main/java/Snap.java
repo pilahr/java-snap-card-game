@@ -120,7 +120,7 @@ public class Snap extends CardGame {
             timer.scheduleAtFixedRate(task, 2000, 2000);
 
             while (!snapped && input.equals("snap")) {
-                System.out.println("\n** It's not a snap, you loose! **\n");
+                System.out.println("\n** It's not a snap, you lose! **\n");
                 timer.cancel();
                 replay(playerOne, playerTwo);
             }
