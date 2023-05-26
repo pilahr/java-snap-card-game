@@ -26,7 +26,6 @@ public class CardGame {
                 } else {
                     symbol = Integer.toString(j);
                 }
-
                 deckOfCards.add(new Card(CardSuit.values()[i].getCardSuitUnicode(), symbol, j));
             }
         }
@@ -36,7 +35,7 @@ public class CardGame {
         return deckOfCards;
     }
 
-    public Card dealCard(int cardIndex) {
+    public Card dealCard() {
         Card topCard = deckOfCards.get(0);
         deckOfCards.remove(0);
         return topCard;
@@ -44,13 +43,13 @@ public class CardGame {
 
     public ArrayList<Card> sortDeckingNumberOrder() {
         return (ArrayList<Card>) deckOfCards.stream()
-                .sorted((a,b) -> a.getValue()-b.getValue())
+                .sorted((a, b) -> a.getValue() - b.getValue())
                 .collect(Collectors.toList());
     }
 
     public ArrayList<Card> sortDeckIntoSuits() {
         return (ArrayList<Card>) deckOfCards.stream()
-                .sorted((a,b) -> a.getSuit().compareTo(b.getSuit()))
+                .sorted((a, b) -> a.getSuit().compareTo(b.getSuit()))
                 .collect(Collectors.toList());
     }
 
