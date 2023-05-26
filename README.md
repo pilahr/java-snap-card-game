@@ -1,6 +1,6 @@
 # Java Snap Card Game ❤️♣️♠️♦️
+<img width="975" alt="27EFA086-78B3-495A-899F-933D0666CAD1" src="https://github.com/pilahr/java-snap-card-game/assets/125895065/5339784b-0603-4ef5-b4a7-14c13ce82071">
 
-<img width="1231" alt="45704937-B417-4661-808F-2849F209841E" src="https://github.com/pilahr/java-snap-card-game/assets/125895065/f3214628-3408-4db6-b8ad-590a79b38994">
 <img width="1120" alt="B7C9ACAA-A818-485C-BA1B-7BF38829EEA2" src="https://github.com/pilahr/java-snap-card-game/assets/125895065/867d4ccb-3a47-44dc-911b-8f627920feaf">
 
 
